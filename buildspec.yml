@@ -1,0 +1,32 @@
+# Do not change version. This is the version of aws buildspec, not the version of your buldspec file.
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10  
+    commands:
+      - echo Installing Terraform.
+      - curl -s -qL -o terraform_install.zip https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+      - unzip terraform_install.zip -d /usr/bin/
+      - chmod +x /usr/bin/terraform
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+      - echo Installing source NPM dependencies in lambda layers
+      - sh build.sh
+  build:
+    commands:
+      - echo Run unit tests
+      - npm test
+      - echo Build started on `date`
+      - sh infra.sh
+  post_build:
+    commands:
+      - echo Jelpit Back-End Build/Deploy completed on `date`
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: dist
