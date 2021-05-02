@@ -1,0 +1,4 @@
+node_modules/
+sam-depoly.yaml
+.terraform/
+.DS_Store
