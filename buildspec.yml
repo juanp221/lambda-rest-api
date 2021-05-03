@@ -7,7 +7,7 @@ phases:
       nodejs: 10  
     commands:
       - echo Installing Terraform.
-      - curl -s -qL -o terraform_install.zip https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+      - curl -s -qL -o terraform_install.zip https://releases.hashicorp.com/terraform/0.15.1/terraform_0.15.1_linux_amd64.zip
       - unzip terraform_install.zip -d /usr/bin/
       - chmod +x /usr/bin/terraform
   pre_build:
